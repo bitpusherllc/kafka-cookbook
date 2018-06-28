@@ -107,8 +107,7 @@ default['kafka']['log4j_opts'] = lazy { format('-Dlog4j.configuration=file:%s', 
 default['kafka']['jvm_performance_opts'] = %w[
   -server
   -XX:+UseCompressedOops
-  -XX:+UseParNewGC
-  -XX:+UseConcMarkSweepGC
+  -XX:+UseG1GC
   -XX:+CMSClassUnloadingEnabled
   -XX:+CMSScavengeBeforeRemark
   -XX:+DisableExplicitGC
