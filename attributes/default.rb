@@ -64,7 +64,7 @@ default['kafka']['jmx_port'] = 9999
 
 #
 # Prometheus-compatible metrics port for Kafka.
-default['kafka']['prometheus_metrics_port'] = 7071
+default['kafka']['prometheus_metrics_port'] = 9404
 
 #
 # JMX configuration options for Kafka.
