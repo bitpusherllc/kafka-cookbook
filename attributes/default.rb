@@ -41,6 +41,11 @@ default['kafka']['install_dir'] = '/opt/kafka'
 default['kafka']['version_install_dir'] = nil
 
 #
+# Directory where to install add-ons for *this* version of Kafka.
+# For actual default value see `_defaults` recipe.
+default['kafka']['version_addons_install_dir'] = nil
+
+#
 # Directory where the downloaded archive will be extracted to.
 default['kafka']['build_dir'] = ::File.join(Dir.tmpdir, 'kafka-build')
 
@@ -56,6 +61,10 @@ default['kafka']['config_dir'] = nil
 #
 # JMX port for Kafka.
 default['kafka']['jmx_port'] = 9999
+
+#
+# Prometheus-compatible metrics port for Kafka.
+default['kafka']['prometheus_metrics_port'] = 7071
 
 #
 # JMX configuration options for Kafka.
@@ -91,7 +100,7 @@ default['kafka']['heap_opts'] = '-Xmx1G -Xms1G'
 
 #
 # Generic JVM options for Kafka.
-default['kafka']['generic_opts'] = nil
+default['kafka']['generic_opts'] = lazy { format('-javaagent:%s=%d:%s', ::File.join(node['kafka']['version_addons_install_dir'], 'jmx_prometheus_javaagent-0.3.1.jar'), node['kafka']['prometheus_metrics_port'], ::File.join(node['kafka']['config_dir'], 'kafka-2_0_0.yml')) }
 
 #
 # GC log options for Kafka. For the actual default value

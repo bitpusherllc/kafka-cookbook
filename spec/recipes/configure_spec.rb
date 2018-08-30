@@ -34,6 +34,20 @@ describe 'kafka::_configure' do
     )
   end
 
+  describe 'jmx_prometheus_javaagent configuration file' do
+    let :path do
+      '/opt/kafka/config/kafka-2_0_0.yml'
+    end
+
+    it 'creates the configuration file' do
+      expect(chef_run).to create_template(path).with(
+        owner: 'kafka',
+        group: 'kafka',
+        mode: '644',
+      )
+    end
+  end
+
   describe 'broker configuration file' do
     let :path do
       '/opt/kafka/config/server.properties'
@@ -181,11 +195,11 @@ describe 'kafka::_configure' do
       end
 
       it 'sets KAFKA_OPTS' do
-        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_OPTS').as('""')
+        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_OPTS').as('"-javaagent:/opt/kafka-2.0.0-addons/jmx_prometheus_javaagent-0.3.1.jar=7071:/opt/kafka/config/kafka-2_0_0.yml"')
       end
 
       it 'sets KAFKA_JVM_PERFORMANCE_OPTS' do
-        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_JVM_PERFORMANCE_OPTS').as('"-server -XX:+UseCompressedOops -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:+DisableExplicitGC -Djava.awt.headless=true"')
+        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_JVM_PERFORMANCE_OPTS').as('"-server -XX:+UseCompressedOops -XX:+UseG1GC -XX:+CMSClassUnloadingEnabled -XX:+CMSScavengeBeforeRemark -XX:+DisableExplicitGC -Djava.awt.headless=true"')
       end
 
       it 'sets KAFKA_RUN' do

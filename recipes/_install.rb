@@ -52,3 +52,9 @@ link node['kafka']['install_dir'] do
   group node['kafka']['group']
   to node['kafka']['version_install_dir']
 end
+
+maven 'jmx_prometheus_javaagent' do
+  group_id 'io.prometheus.jmx'
+  version '0.3.1'
+  dest node['kafka']['version_addons_install_dir']
+end

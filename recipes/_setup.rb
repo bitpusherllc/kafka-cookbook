@@ -18,6 +18,7 @@ end
 
 [
   node['kafka']['version_install_dir'],
+  node['kafka']['version_addons_install_dir'],
   node['kafka']['log_dir'],
   node['kafka']['build_dir'],
 ].each do |dir|

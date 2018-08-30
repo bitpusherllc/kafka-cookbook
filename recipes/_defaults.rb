@@ -18,3 +18,7 @@ end
 unless node['kafka']['version_install_dir']
   node.default['kafka']['version_install_dir'] = %(#{node['kafka']['install_dir']}-#{node['kafka']['version']})
 end
+
+unless node['kafka']['version_addons_install_dir']
+  node.default['kafka']['version_addons_install_dir'] = %(#{node['kafka']['install_dir']}-#{node['kafka']['version']}-addons)
+end
