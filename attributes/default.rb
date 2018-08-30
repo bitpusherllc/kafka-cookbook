@@ -5,7 +5,7 @@
 
 #
 # Version of Kafka to install.
-default['kafka']['version'] = '1.0.0'
+default['kafka']['version'] = '1.1.0'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
@@ -15,7 +15,7 @@ default['kafka']['base_url'] = 'https://archive.apache.org/dist/kafka'
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-default['kafka']['checksum'] = 'd5b1d00752252d9c129e9284f26f8280e9899dd374167f257e29d5346eb544b3'
+default['kafka']['checksum'] = '499283970b5020358726949b4f1d93d3167bc5eecaa1d167076bae6bb2862d12'
 
 #
 # MD5 checksum of the archive to download, which will be used to validate that
@@ -25,7 +25,7 @@ default['kafka']['md5_checksum'] = nil
 #
 # SHA512 checksum of the archive to download, which will be used to validate that
 # the "correct" archive has been downloaded.
-default['kafka']['sha512_checksum'] = '1b647b7f392148aa2b9d47550a1502e50be4b005c70c82dae03065b89484e66400528be40ca2d54f35eb2c0e70f35c88a04777c2b625daa5d5546caab4ed6818'
+default['kafka']['sha512_checksum'] = '48d1ddc71f5a5b1b25d111f792553be69be62293640a3c6af985203c6ee88c6aa78e01327066bfad3feae6b0b45d71c0cac6ebd2d08843d92269132741a3791b'
 
 #
 # Scala version of Kafka.
@@ -107,8 +107,7 @@ default['kafka']['log4j_opts'] = lazy { format('-Dlog4j.configuration=file:%s', 
 default['kafka']['jvm_performance_opts'] = %w[
   -server
   -XX:+UseCompressedOops
-  -XX:+UseParNewGC
-  -XX:+UseConcMarkSweepGC
+  -XX:+UseG1GC
   -XX:+CMSClassUnloadingEnabled
   -XX:+CMSScavengeBeforeRemark
   -XX:+DisableExplicitGC
@@ -118,7 +117,7 @@ default['kafka']['jvm_performance_opts'] = %w[
 #
 # The type of "init" system to install scripts for. Valid values are currently
 # :sysv, :systemd and :upstart.
-default['kafka']['init_style'] = :sysv
+default['kafka']['init_style'] = :systemd
 
 #
 # The ulimit file limit.
