@@ -63,3 +63,37 @@ service 'kafka' do
 end unless kafka_runit?
 
 include_recipe node['kafka']['start_coordination']['recipe']
+
+sysctl_param 'fs.file-max' do
+  value node['kafka']['ulimit_file']
+end
+
+sysctl_param 'vm.max_map_count' do
+  value node['kafka']['ulimit_file']
+end
+
+set_limit '*' do
+  type 'hard'
+  item 'nofile'
+  value node['kafka']['ulimit_file']
+  use_system true
+end
+
+set_limit '*' do
+  type 'soft'
+  item 'nofile'
+  value node['kafka']['ulimit_file']
+  use_system true
+end
+
+set_limit node['kafka']['user'] do
+  type 'hard'
+  item 'nofile'
+  value node['kafka']['ulimit_file']
+end
+
+set_limit node['kafka']['user'] do
+  type 'soft'
+  item 'nofile'
+  value node['kafka']['ulimit_file']
+end

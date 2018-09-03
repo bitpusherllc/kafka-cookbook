@@ -135,7 +135,7 @@ default['kafka']['init_style'] = :systemd
 # value, or you will most likely run into issues with Kafka simply dying for no
 # particular reason as it needs to keep a lot of file handles for socket
 # connections and log files for all partitions.
-default['kafka']['ulimit_file'] = nil
+default['kafka']['ulimit_file'] = 2000000
 
 #
 # Automatically start kafka service.
