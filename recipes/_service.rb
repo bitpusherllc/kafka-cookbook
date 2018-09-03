@@ -64,25 +64,29 @@ end unless kafka_runit?
 
 include_recipe node['kafka']['start_coordination']['recipe']
 
+sysctl_param 'fs.nr_open' do
+  value node['kafka']['ulimit_file'] + 1024*1024
+end
+
 sysctl_param 'fs.file-max' do
-  value node['kafka']['ulimit_file']
+  value node['kafka']['ulimit_file'] + 64*1024
 end
 
 sysctl_param 'vm.max_map_count' do
-  value node['kafka']['ulimit_file']
+  value node['kafka']['ulimit_file'] + 64*1024
 end
 
 set_limit '*' do
   type 'hard'
   item 'nofile'
-  value node['kafka']['ulimit_file']
+  value node['kafka']['ulimit_file'] + 64*1024
   use_system true
 end
 
 set_limit '*' do
   type 'soft'
   item 'nofile'
-  value node['kafka']['ulimit_file']
+  value node['kafka']['ulimit_file'] + 64*1024
   use_system true
 end
 
