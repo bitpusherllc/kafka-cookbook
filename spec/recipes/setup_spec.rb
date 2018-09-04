@@ -78,7 +78,7 @@ describe 'kafka::_setup' do
   end
 
   it 'creates installation directory' do
-    expect(chef_run).to create_directory('/opt/kafka-2.0.0').with(
+    expect(chef_run).to create_directory('/opt/kafka-1.1.1').with(
       owner: 'kafka',
       group: 'kafka',
       mode: '755',
@@ -86,7 +86,7 @@ describe 'kafka::_setup' do
   end
 
   it 'creates add-ons installation directory' do
-    expect(chef_run).to create_directory('/opt/kafka-2.0.0-addons').with(
+    expect(chef_run).to create_directory('/opt/kafka-1.1.1-addons').with(
       owner: 'kafka',
       group: 'kafka',
       mode: '755',

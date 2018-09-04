@@ -195,7 +195,7 @@ describe 'kafka::_configure' do
       end
 
       it 'sets KAFKA_OPTS' do
-        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_OPTS').as('"-javaagent:/opt/kafka-2.0.0-addons/jmx_prometheus_javaagent-0.3.1.jar=9404:/opt/kafka/config/kafka-2_0_0.yml"')
+        expect(chef_run).to have_configured(env_path).with('(export |)KAFKA_OPTS').as('"-javaagent:/opt/kafka-1.1.1-addons/jmx_prometheus_javaagent-0.3.1.jar=9404:/opt/kafka/config/kafka-2_0_0.yml"')
       end
 
       it 'sets KAFKA_JVM_PERFORMANCE_OPTS' do

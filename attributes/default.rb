@@ -5,7 +5,7 @@
 
 #
 # Version of Kafka to install.
-default['kafka']['version'] = '2.0.0'
+default['kafka']['version'] = '1.1.1'
 
 #
 # Base URL for Kafka releases. The recipes will a download URL using the
@@ -15,7 +15,7 @@ default['kafka']['base_url'] = 'https://archive.apache.org/dist/kafka'
 #
 # SHA-256 checksum of the archive to download, used by Chef's `remote_file`
 # resource.
-default['kafka']['checksum'] = 'b5f1539c4030e6f6e64d0c14a9acea31156e7cbf2cb66c93ca2b6ca732ba7955'
+default['kafka']['checksum'] = 'c261c4243c0e7044b4fb6144d2ea12abcaf5185ca416c0dd35a069272a076f8f'
 
 #
 # MD5 checksum of the archive to download, which will be used to validate that
@@ -25,7 +25,7 @@ default['kafka']['md5_checksum'] = nil
 #
 # SHA512 checksum of the archive to download, which will be used to validate that
 # the "correct" archive has been downloaded.
-default['kafka']['sha512_checksum'] = 'b28e81705e30528f1abb6766e22dfe9dae50b1e1e93330c880928ff7a08e6b38ee71cbfc96ec14369b2dfd24293938702cab422173c8e01955a9d1746ae43f98'
+default['kafka']['sha512_checksum'] = '2a1eb9a7c8c8337c424eefed7baae26b3dacba6a4ab8b64d9a7d5c6ee2cdb66cfa76c5b366f23435941569b89bf02482625189016296b2ea2a05fd0f38f6b709'
 
 #
 # Scala version of Kafka.
