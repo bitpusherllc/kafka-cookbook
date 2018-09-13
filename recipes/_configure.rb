@@ -29,7 +29,8 @@ template ::File.join(node['kafka']['config_dir'], 'server.properties') do
   mode '600'
   sensitive true
   helpers(Kafka::Configuration)
-  variables(config: node['kafka']['broker'].sort_by(&:first))
+  config = Hash[node['kafka']['broker'].map{ |k, v| [k, v % {hostname: node['hostname']}] }].sort_by(&:first)
+  variables(config: config)
   if restart_on_configuration_change?
     notifies :create, 'ruby_block[coordinate-kafka-start]', :delayed
   end
